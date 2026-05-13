@@ -16,8 +16,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:4000",
 
-  // Add your Vercel frontend URL later
-  // "https://your-app.vercel.app",
+  "https://production-ready-mern.vercel.app",
 ];
 
 // CORS Configuration
