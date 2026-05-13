@@ -4,29 +4,47 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
 const app = express();
 
+// Middleware
 app.use(express.json());
+
+// Allowed Origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:3000",
+  "http://localhost:4000",
+
+  // Add your Vercel frontend URL later
+  // "https://your-app.vercel.app",
+];
+
+// CORS Configuration
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:3000",
-      "http://localhost:4000",
-      // prodution url
-    ],
+    origin: allowedOrigins,
     credentials: true,
-  }),
+  })
 );
 
-// API route
+// Test Route
 app.get("/api/message", (req, res) => {
-  res.json({ message: "Hello from sky farm " });
+  res.json({
+    success: true,
+    message: "Hello from sky farm backend!",
+  });
 });
 
+// Health Check Route (useful for Render)
+app.get("/healthz", (req, res) => {
+  res.status(200).send("OK");
+});
+
+// PORT
 const PORT = process.env.PORT || 4000;
-app.listen(PORT,"0.0.0.0", () =>
-  console.log(`Server is running at http://localhost:${PORT} `),
-);
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
