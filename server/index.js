@@ -32,7 +32,7 @@ app.use(
 app.get("/api/message", (req, res) => {
   res.json({
     success: true,
-    message: "Hello from sky farm backend!",
+    message: "Version 2 deployed",
   });
 });
 
