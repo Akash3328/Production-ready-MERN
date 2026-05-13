@@ -1,0 +1,29 @@
+
+services:
+  server:
+    build: ./server
+    container_name: doc-server
+    ports:
+    - "4000:4000"
+    networks:
+    - doc-network
+    restart: unless-stopped
+
+  client:
+    build: ./client 
+    container_name: doc-client
+    ports:
+    - "5174:3000"
+    networks:
+      - doc-network
+    depends_on:
+      - server
+    restart: unless-stopped
+
+
+networks:
+  doc-network:
+    driver: bridge
+
+
+     

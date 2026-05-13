@@ -10,6 +10,7 @@ RUN npm run build
 FROM node:alpine as production-stage
 WORKDIR /app
 RUN npm i -g serve
+ENV PATH="/usr/local/bin:$PATH"
 COPY --from=build-stage /app/dist ./dist
 EXPOSE 3000 
 CMD ["serve", "-s", "dist", "-l", "3000"]
